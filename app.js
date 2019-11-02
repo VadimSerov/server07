@@ -57,7 +57,7 @@
 	//задача file2 -- 1000 задач по программированию Часть II Абрамян М.Э. 2004 --
 	//решение на стороне сервера, бинарные файлы не использовать
 	btnfile2.onclick = function(){
-		socket.emit("file2Server",{"n":Number("inpn"),"filename":inpfilename.value});
+		socket.emit("file2Server",{"n":Number(inpn.value),"filename":inpfilename.value});
 	}
 
 

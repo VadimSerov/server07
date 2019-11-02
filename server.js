@@ -100,7 +100,7 @@ ios.sockets.on('connection', function (socket) {
 		try{
 			var nex = 2
 			var string5=String(nex);
-			for(let i=0;i<=data5.n+1;i++){
+			for(let i=1;i<data5.n;i++){
 				nex += 2 ;
 				string5 += " "+String(nex); 
 			}
