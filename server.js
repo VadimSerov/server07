@@ -94,6 +94,23 @@ ios.sockets.on('connection', function (socket) {
 		}
 		socket.emit("wrClient",{"err":err,"filename":data4.filename});
 	});
+	//задача file2 -- 1000 задач по программированию Часть II Абрамян М.Э. 2004 --
+	socket.on("file2Server",function(data5){
+		console.log("Write file "+data5.filename);
+		try{
+			var nex = 2
+			var string5=String(nex);
+			for(let i=0;i<=data5.n+1;i++){
+				nex += 2 ;
+				string5 += " "+String(nex); 
+			}
+			fs.writeFileSync(data5.filename,string5);
+			err="";
+		}catch{
+			err = "Can't write file.";			
+		}
+		socket.emit("wrClient",{"err":err,"filename":data5.filename});
+	});
 	socket.on('disconnect', function () {
 		//console.log('user disconnected',n_disconnect++);
 	});
