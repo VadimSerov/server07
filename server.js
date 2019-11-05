@@ -67,8 +67,12 @@ server.on('request',function(request,response){
 server.listen(port,host,function(){
 	console.log('Сервер работает. Слушает хост:',host,' ,  порт:',port)
 });
-//n_disconnect=0
+
+//установить счётчик рассоединений
+//n_disconnect=0;
+
 ios.sockets.on('connection', function (socket) {
+
 	socket.on('eventServer', function (data) {
 		console.log(data);
 		socket.emit('eventClient', { "data": 'Hello Client! You send: '+data });
@@ -111,6 +115,24 @@ ios.sockets.on('connection', function (socket) {
 		}
 		socket.emit("wrClient",{"err":err,"filename":data5.filename});
 	});
+	//задача file3 -- 1000 задач по программированию Часть II Абрамян М.Э. 2004 --
+	socket.on("file3Server",function(data6){
+		console.log("Write file "+data6.filename);
+		try{
+			var buf = [];
+			var x=data6.a;
+			for(let i=0;i<10;i++){
+				buf.push(x);
+				x += data6.b;
+			}
+			//преобразовать в JSON и записать в файл на сервере
+			fs.writeFileSync(data6.filename, JSON.stringify(buf));
+			err="";
+		}catch{
+			err="Can't write file.";
+		}
+	});
+	// что делать при разъединении с браузером 
 	socket.on('disconnect', function () {
 		//console.log('user disconnected',n_disconnect++);
 	});
